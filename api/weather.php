@@ -44,8 +44,11 @@ class Weather
     $url = self::BASEURL.'?q=';
     $url .= ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
 
+    //generate a timestamp so we it doesnt cache
+    $date = new DateTime();
+
     //for this one it wasn't needed but i've used this to keep it consistant with the others
-    $url .= '&cnt=1&mode=json&APPID='.self::APPID;
+    $url .= '&cnt=1&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
     return $content;
   }
@@ -57,8 +60,11 @@ class Weather
     $url = self::BASEURL.'?q=';
     $url .= ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
 
+    //generate a timestamp so we it doesnt cache
+    $date = new DateTime();
+
     //now add the peroid as 7 and return json
-    $url .= '&cnt=7&mode=json&APPID='.self::APPID;
+    $url .= '&cnt=7&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
     return $content;
   }
@@ -70,8 +76,11 @@ class Weather
     $url = self::BASEURL.'?q=';
     $url .= ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
 
+    //generate a timestamp so we it doesnt cache
+    $date = new DateTime();
+
     //now add the peroid as 14 and return json
-    $url .= '&cnt=14&mode=json&APPID='.self::APPID;
+    $url .= '&cnt=14&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
     return $content;
   }
