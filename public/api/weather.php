@@ -22,7 +22,7 @@ class Weather
     $this->searchLocation   = $searchLocation;
 
     //regardless we want to grab the users ip for now just incase we wish to do soemthing with it
-    $this->searchIp     = $_SERVER['REMOTE_ADDR'];
+    $this->searchIp     = $this->get_client_ip();
  
     // since development was done with xampp, this if statement was needed to add a fall back.
     // once in this if statement, it would grab the users city through a website to get the the details
@@ -85,6 +85,25 @@ class Weather
     $url .= '&cnt=14&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
     return $content;
+  }
+
+  private function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
   }
 }
 ?>
