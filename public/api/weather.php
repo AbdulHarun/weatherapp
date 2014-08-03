@@ -23,13 +23,15 @@ class Weather
 
     //regardless we want to grab the users ip for now just incase we wish to do soemthing with it
     $this->searchIp     = $_SERVER['REMOTE_ADDR'];
-
+ 
     // since development was done with xampp, this if statement was needed to add a fall back.
     // once in this if statement, it would grab the users city through a website to get the the details
     if($this->searchIp !== '127.0.0.1'){
 
       //lets grab the city just incase we need it and it can be 
     $details = json_decode(file_get_contents("http://ipinfo.io/{$this->searchIp}/json"));
+    var_dump($this->searchIp);
+    var_dump($details);
     $this->cityByIp = $details->city.",".$details->country;
     } else {
 
