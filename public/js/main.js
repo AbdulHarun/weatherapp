@@ -1,6 +1,6 @@
 
 var apiCalls = {
-	search: '../api/search.php'
+	search: 'api/search.php'
 }
 
 function requireTemplate(name, data) {
