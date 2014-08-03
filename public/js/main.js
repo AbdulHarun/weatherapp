@@ -25,6 +25,7 @@ function loadContent(template){
 }
 
 function binds(){
+	
 	$('#searchType').change(function(){
 		var searchTerm = $('#searchTerm');
 		if(this.value == 'ip'){
@@ -35,6 +36,9 @@ function binds(){
 	});
 
 	$('#searchSubmit').click(doSearch);
+	//searchTerm needs to be accessed through basic javascript otherwise it wont work with googles auto complete
+	var input = document.getElementById('searchTerm');
+	var autocomplete = new google.maps.places.Autocomplete(input);
 }
 
 function doSearch(e){
