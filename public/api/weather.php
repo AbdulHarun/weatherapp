@@ -29,10 +29,8 @@ class Weather
     if($this->searchIp !== '127.0.0.1'){
 
       //lets grab the city just incase we need it and it can be 
-    $details = json_decode(file_get_contents("http://ipinfo.io/{$this->searchIp}/json"));
-    var_dump($this->searchIp);
-    var_dump($details);
-    $this->cityByIp = $details->city.",".$details->country;
+      $details = json_decode(file_get_contents("http://ipinfo.io/{$this->searchIp}/json"));
+      $this->cityByIp = $details->city.",".$details->country;
     } else {
 
       //mainly for testing
