@@ -1,5 +1,8 @@
-<ul>
+<div class="display-block">
     {{#each list}}
-        <li><img src="http://openweathermap.org/img/w/{{weather.0.icon}}.png" alt="">{{weather.0.main}}</li>
+        <div>
+        <h3>{{formatDate dt}}</h3>
+        	<img src="http://openweathermap.org/img/w/{{weather.0.icon}}.png" alt="">{{weather.0.main}}
+        </div>
     {{/each}}
-</ul>
+</div>
