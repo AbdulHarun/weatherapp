@@ -40,7 +40,7 @@ function test($by, $searchTerm = "", $forcast = "current", $expectedSize = 0){
 	} catch(Exception $e){
 		print_r($e);
 	}
-	
+	sleep(1);
 }
 
 
