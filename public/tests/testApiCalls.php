@@ -13,6 +13,7 @@ test('postcode','B191Rl', 'current', 1);
 test('postcode','B191Rl', '7_days', 7);
 test('postcode','B191Rl', '14_days', 14);
 
+//since server calls these files, the ip belonging to the server is given which returns a 127.X.X.X basically local host
 test('ip','', 'current', 1);
 test('ip','', '7_days', 7);
 test('ip','', '14_days', 14);
