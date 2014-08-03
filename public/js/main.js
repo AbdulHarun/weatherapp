@@ -15,6 +15,21 @@ $(document).ready(function(){
 });
 
 function init(template){
+	//format the options to give custom date
+	moment.lang('en', {
+	    calendar : {
+	        lastDay : '[Yesterday]',
+	        sameDay : '[Today]',
+	        nextDay : '[Tomorrow]',
+	        lastWeek : '[last] dddd',
+	        nextWeek : 'ddd Do MMMM',
+	        sameElse : 'ddd Do MMMM'
+	    }
+	});
+
+	Handlebars.registerHelper("formatDate", function(timestamp) {
+		return moment(timestamp*1000).calendar();
+	});
 	loadContent(template);
 	binds();
 	
