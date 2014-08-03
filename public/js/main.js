@@ -1,4 +1,8 @@
 
+var apiCalls = {
+	search: '../api/search.php'
+}
+
 function requireTemplate(name, data) {
     return $.get('js/templates/'+name+'.hbs').then(function(src) {
        return Handlebars.compile(src)(data);
@@ -12,6 +16,7 @@ $(document).ready(function(){
 
 function init(template){
 	loadContent(template);
+	binds();
 	
 }
 
