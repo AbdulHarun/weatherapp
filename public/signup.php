@@ -5,8 +5,14 @@
     <title>Weather App - Signup</title>
 
     <?php
+
+      $dbusername = 'root';
+      $dbpassword = '';
       // if we decide to have a login session then we can use this but for now its not needed
       session_start();  
+      if(isset($_SESSION['userId'])){
+        header('Location:index.php');
+      }
       $errorMsg = null;
       //i like having it in a variable as opposed to having the _SERVER array in the if statement. 
       $isPost = ($_SERVER['REQUEST_METHOD'] === 'POST');
@@ -14,7 +20,32 @@
         if(isEmpty($_POST['name']) || isEmpty($_POST['email']) || isEmpty($_POST['username']) || isEmpty($_POST['password'])){
           $errorMsg = "Please make sure all fields are filled in";
         } else {
-          
+          $username = $_POST['username'];
+          $email = $_POST['email'];
+          $name = $_POST['name'];
+          $password = md5($_POST['password']);
+
+          $db = new PDO('mysql:host=localhost;dbname=weatherapp;charset=utf8', $dbusername, $dbpassword);
+          $sql = "SELECT * From weather_users WHERE username = :username";
+          $stmt = $db->prepare($sql);
+          $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+          $stmt->execute();
+          $affected_rows = $stmt->rowCount();
+          if($affected_rows > 0){
+            $errorMsg = "Username taken";
+          } else {
+            $sql = "INSERT INTO weather_users (id, username, password, name, email) VALUES ( NULL, :username, :password, :name, :email );";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->execute();
+            $id = $db->lastInsertId(); 
+            $_SESSION['userId'] = $id;
+            header('Location:index.php');
+          }
+
         }
       }
 
