@@ -7,7 +7,12 @@
 
     <?php
       //if we decide to have a login session then we can use this but for now its not needed
-      // session_start();  
+      session_start(); 
+      //i prefer to do logic above and then echo out the element i want although this may not be ideal.
+      $loginElem = "<a href='login.php'> Login </a> <a href='signup.php'> Sign Up </a>";
+      //override if we have a user id
+      if(isset($_SESSION['userId'])) $loginElem = "<a href='logout.php'> Logout </a>";
+         
     ?>
 
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -20,7 +25,7 @@
 
   <body>
     <div class="header">
-      
+      <?php echo $loginElem; ?>
     </div>
 
     <div id="content">
