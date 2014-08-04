@@ -5,8 +5,8 @@
 	class DBWeatherSearch
 	{
 		
-		const DBUSERNAME = "root";
-		const DBPASS = "";
+		const DBUSERNAME = "abdulharun";
+		const DBPASS = "thispassword";
 		private $db;
 		function __construct()
 		{

@@ -54,6 +54,8 @@ class Weather
     $content = file_get_contents($url);
 
     $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+
+    
     $DBSearch = new DBWeatherSearch();
     $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
     return $content;
