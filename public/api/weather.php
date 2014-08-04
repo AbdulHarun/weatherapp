@@ -2,8 +2,10 @@
 /**
 * Author: Abdul Harun
 * Title: Weather Application
-* Description: Basic weather application which uses open weather map's api to gather information
+* Description: Basic weather application which uses open weather map's api to gather information (similar to a controller)
 */
+
+include('dbweathersearch.php');
 class Weather
 {
   private $searchLocation;
@@ -50,6 +52,10 @@ class Weather
     //for this one it wasn't needed but i've used this to keep it consistant with the others
     $url .= '&cnt=1&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
+
+    $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+    $DBSearch = new DBWeatherSearch();
+    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
     return $content;
   }
 
@@ -66,6 +72,10 @@ class Weather
     //now add the peroid as 7 and return json
     $url .= '&cnt=7&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
+
+    $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+    $DBSearch = new DBWeatherSearch();
+    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
     return $content;
   }
 
@@ -82,6 +92,10 @@ class Weather
     //now add the peroid as 14 and return json
     $url .= '&cnt=14&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
+
+    $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+    $DBSearch = new DBWeatherSearch();
+    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
     return $content;
   }
 

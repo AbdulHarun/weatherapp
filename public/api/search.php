@@ -7,7 +7,7 @@
 
 //require the class
 require('weather.php');
-
+session_start(); 
 //we shall be returning it as json so set the header 
 header('Content-Type: application/json');
 
