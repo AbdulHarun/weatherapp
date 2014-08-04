@@ -12,7 +12,7 @@
       }
       include('api/loginclass.php');
       $login = new Login();
-      // $errorMsg = $login->login();
+      $errorMsg = $login->login();
     ?>
 
     <link href="css/style.css" rel="stylesheet" type="text/css" />
