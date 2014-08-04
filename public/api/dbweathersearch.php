@@ -10,7 +10,7 @@
 		private $db;
 		function __construct()
 		{
-			$this->db = new PDO('mysql:host=127.12.20.130:3306;dbname=weatherapp;charset=utf8', self::DBUSERNAME, self::DBPASS);
+			$this->db = new PDO('mysql:host=127.12.20.130;port=3306;dbname=weatherapp;charset=utf8', self::DBUSERNAME, self::DBPASS);
 		}
 
 		public function storeResult($user_id = null, $url = null, $json_received = null, $searchBy = null, $searchLocation = null, $searchIp = null){
