@@ -10,7 +10,7 @@
       if(isset($_SESSION['userId'])){
         header('Location:index.php');
       }
-      // include('api/loginclass.php');
+      include('api/loginclass.php');
       // $login = new Login();
       // $errorMsg = $login->login();
     ?>
