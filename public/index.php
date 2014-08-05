@@ -33,6 +33,23 @@
       </div>
       <div id="searchResults">
       </div>
+      <?php 
+        if(isset($_SESSION['userId'])){ 
+          include('api/dbweathersearch.php');
+          $DBSearch = new DBWeatherSearch();
+          $items = $DBSearch->getSearchsByUserId($_SESSION['userId']);
+          ?>
+          <div>
+            <h3>Recent Searches:</h3>
+            <?php 
+            foreach ($items as $item) {
+              echo "<div class=\"display-block\"> <b><u>Searched By:</u></b> ".$item['searchBy']." <b><u>Search Location:</u></b> ".$item['searchLocation']." </div>";
+            }
+      ?>
+          </div>
+      <?php
+        }        
+      ?>
     </div>
 
     <div class="footer">
