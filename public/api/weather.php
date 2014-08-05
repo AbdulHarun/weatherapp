@@ -44,20 +44,21 @@ class Weather
   public function search_current(){
     //grab the base url for the api and then add the query data which is the location
     $url = self::BASEURL.'?q=';
-    $url .= ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
+    $city = ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
+    $url .= $city;
 
     //generate a timestamp so we it doesnt cache
     $date = new DateTime();
 
     //for this one it wasn't needed but i've used this to keep it consistant with the others
-    $url .= '&cnt=1&mode=json&t'.$date->getTimestamp();
+    $url .= '&units=metric&cnt=1&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
 
     $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
 
-    
+
     $DBSearch = new DBWeatherSearch();
-    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
+    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $city, $this->searchIp);
     return $content;
   }
 
@@ -66,18 +67,19 @@ class Weather
   public function search_7_days(){
     //grab the base url for the api and then add the query data which is the location
     $url = self::BASEURL.'?q=';
-    $url .= ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
+    $city = ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
+    $url .= $city;
 
     //generate a timestamp so we it doesnt cache
     $date = new DateTime();
 
     //now add the peroid as 7 and return json
-    $url .= '&cnt=7&mode=json&t'.$date->getTimestamp();
+    $url .= '&units=metric&cnt=7&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
 
     $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
     $DBSearch = new DBWeatherSearch();
-    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
+    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $city, $this->searchIp);
     return $content;
   }
 
@@ -86,18 +88,19 @@ class Weather
   public function search_14_days(){
     //grab the base url for the api and then add the query data which is the location
     $url = self::BASEURL.'?q=';
-    $url .= ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
+    $city = ($this->searchBy == 'ip') ? urlencode($this->cityByIp) : urlencode($this->searchLocation);
+    $url .= $city;
 
     //generate a timestamp so we it doesnt cache
     $date = new DateTime();
 
     //now add the peroid as 14 and return json
-    $url .= '&cnt=14&mode=json&t'.$date->getTimestamp();
+    $url .= '&units=metric&cnt=14&mode=json&t'.$date->getTimestamp();
     $content = file_get_contents($url);
 
     $user_id = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
     $DBSearch = new DBWeatherSearch();
-    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $this->searchLocation, $this->searchIp);
+    $DBSearch->storeResult($user_id, $url, $content, $this->searchBy, $city, $this->searchIp);
     return $content;
   }
 
