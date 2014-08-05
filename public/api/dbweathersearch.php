@@ -8,6 +8,8 @@
 		const DBUSERNAME = "abdulharun";
 		const DBPASS = "thispassword";
 		private $db;
+		//live: host=127.12.20.130;port=3306
+		//dev:host=localhost
 		function __construct()
 		{
 			$this->db = new PDO('mysql:host=127.12.20.130;port=3306;dbname=weatherapp;charset=utf8', self::DBUSERNAME, self::DBPASS);
@@ -27,6 +29,15 @@
 		    $stmt->bindParam(':searchIp', $searchIp, $this->returnType($searchIp, PDO::PARAM_STR));
 
 		    $stmt->execute();
+		}
+
+		public function getSearchsByUserId($userid){
+ 			$sql = "SELECT * FROM weather_searches WHERE user_id = :userid ORDER BY time DESC LIMIT 10;";
+ 			$stmt = $this->db ->prepare($sql);
+ 			$stmt->bindParam(':userid', $userid, PDO::PARAM_INT);
+ 			$stmt->execute();
+ 			$result = $stmt->fetchAll();
+ 			return $result;
 		}
 
 
