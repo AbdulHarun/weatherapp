@@ -7,6 +7,8 @@
 		const DBUSERNAME = "abdulharun";
 		const DBPASS = "thispassword";
 		private $db;
+		//live: host=127.12.20.130;port=3306
+		//dev:host=localhost
 		function __construct()
 		{
 			$this->db = new PDO('mysql:host=127.12.20.130;port=3306;dbname=weatherapp;charset=utf8', self::DBUSERNAME, self::DBPASS);
